@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Bar Chart</title>
+		<script src=<?php echo asset("js/Chart.js");?>></script>
+	</head>
+	<body>
+	<div id="content">
+	    <center>
+		<div style="width: 50%;margin-top:100px;">
+			<canvas id="canvas" height="450" width="600"></canvas>
+			
+		</div>
+		</center>
+	</div>
+
+		<?php 
+			session_start();
+			$group = Session::get('grpG');
+			$data=Session::get('dataG');
+
+
+		?>
+
+	<script>
+	//var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
+	
+	var barChartData = {
+
+
+
+		labels : ["<?php echo $group[0];?>","<?php echo $group[1];?>","<?php echo $group[2];?>","<?php echo $group[3];?>","<?php echo $group[4];?>","<?php echo $group[5];?>"],
+		datasets : [
+			{
+				fillColor : "rgba(220,220,220,0.5)",
+				strokeColor : "rgba(220,220,220,0.8)",
+				highlightFill: "rgba(220,220,220,0.75)",
+				highlightStroke: "rgba(220,220,220,1)",
+				data : [<?php echo $data[0];?>,<?php echo $data[1];?>,<?php echo $data[2];?>,<?php echo $data[3];?>,<?php echo $data[4];?>,<?php echo $data[5];?>]
+			}
+		]
+
+	}
+	window.onload = function(){
+		var ctx = document.getElementById("canvas").getContext("2d");
+		window.myBar = new Chart(ctx).Bar(barChartData, {
+			responsive : true
+		});
+	}
+
+	</script>
+	</body>
+</html>
